@@ -2,6 +2,7 @@
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using System;
+using Entities.Concrete;
 
 namespace ConsoleUI
 {
@@ -11,8 +12,7 @@ namespace ConsoleUI
         {
             ProductTest();
             //CategoryTest();
-
-
+            
         }
 
         private static void CategoryTest()
@@ -29,16 +29,29 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
 
+            var result = productManager.GetProductDetails();
+
+            if (result.Success==true)
+            {
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName+" / "+product.CategoryName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
 
             //foreach (var product in productManager.GetAll())
             //{
             //    Console.WriteLine(product.ProductName);
             //}
 
-            foreach (var product in productManager.GetProductDetails())
-            {
-                Console.WriteLine(product.CategoryName + " ----- "+product.ProductName);
-            }
+            //foreach (var product in productManager.GetProductDetails().Data)
+            //{
+            //    Console.WriteLine(product.CategoryName + " ----- "+product.ProductName);
+            //}
 
             //foreach (var product in productManager.GetAllByCategoryId(2))
             //{
