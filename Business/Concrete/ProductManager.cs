@@ -25,7 +25,7 @@ namespace Business.Concrete
             //İş kodları
             //Yetkisi var mı?
 
-            if (DateTime.Now.Hour==24)
+            if (DateTime.Now.Hour == 17)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
@@ -57,6 +57,12 @@ namespace Business.Concrete
 
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
+        }
+
+        public IResult Delete(Product product)
+        {
+            _productDal.Delete(product);
+            return new SuccessResult("Ürün Silindi.");
         }
 
         public IDataResult<Product> GetById(int productId)
