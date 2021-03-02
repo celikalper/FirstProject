@@ -11,7 +11,7 @@ namespace Core.Utilities.Results
 
         }
 
-        public SuccessResult(bool success) : base(success)
+        public SuccessResult() : base(true)
         {
 
         }
